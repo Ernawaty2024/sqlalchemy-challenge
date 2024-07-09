@@ -6,7 +6,8 @@ from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 import pandas as pd
 import datetime as dt
-
+# Import Flask
+from flask import Flask, jsonify
 
 #################################################
 # Database Setup
@@ -30,8 +31,6 @@ session = Session(engine)
 #################################################
 # Flask Setup
 #################################################
-# Import Flask
-from flask import Flask, jsonify
 
 # Create an app
 app = Flask(__name__)
@@ -69,7 +68,6 @@ def precipitation():
     precipitation_dict = {date: prcp for date, prcp in precipitation_data}
     
     return jsonify(precipitation_dict)
-    
-               
+         
 if __name__ == '__main__':
     app.run(debug=True)
