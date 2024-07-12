@@ -104,17 +104,16 @@ def tobs():
     return jsonify(tobs_list)
 
 # API DYNAMIC ROUTE
-
 # 1. Start Route
 @app.route("/api/v1.0/<start>")
 def start(start):
-
+   
     # Query min, avg, max temperatures from the start date to the end of the dataset
     Temperature_stats = session.query(
         func.min(Measurement.tobs).label('min_temp'),
         func.avg(Measurement.tobs).label('avg_temp'),
         func.max(Measurement.tobs).label('max_temp'),
-    ).filter(Measurement.date == start).all()
+    ).filter(Measurement.date >= start).all()
 
     # Convert the query results to a dictionary
     Temperature_stats_dict = {
@@ -125,5 +124,24 @@ def start(start):
 
     return jsonify(Temperature_stats_dict)
 
+# 2. Start and End Route
+@app.route("/api/v1.0/<start>/<end>")
+def start_end(start, end):
+    Temp_stats = session.query(
+        func.min(Measurement.tobs),
+        func.avg(Measurement.tobs),
+        func.max(Measurement.tobs)
+    ).filter(Measurement.date >= start).filter(Measurement.date <= end).all()
+
+    # Convert the query results to a dictionary
+    Temp_stats_dict = {
+        "TMIN" : Temp_stats[0][0],
+        "TAVG" : Temp_stats[0][1],
+        "TMAX" : Temp_stats[0][2]    
+    }
+
+    return jsonify(Temp_stats_dict)
+
+# Run the Flask App
 if __name__ == '__main__':
     app.run(debug=True)
