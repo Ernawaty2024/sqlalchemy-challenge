@@ -19,9 +19,27 @@ This project involves climate analysis using SQLite database of weather data for
 
 ### Usage
 #### Available API Endpoints
-1. **Homepage**  : List all available routes
-GET ==/==
+1. **Homepage**  : List all available routes 
 
+    GET `/`
 
-2. 
+2. **Precipitation Data** : Retrieves last 12 months of precipitation data.
+
+    GET `/api/v1.0/precipitation`
+
+3. **Stations** : `Returns a list of all stations.` 
+
+    GET `/api/v1.0/stations`
+
+4. **Temperature Observations**: Returns temperature observations of the most active station for the previous year.
+
+    GET `/api/v1.0/tobs`
+
+5. **Temperature Stats from Start Date**: Returns the minimun, averaget, and maximum temperatures from the start date to the end of the dataset.
+
+    Get `/api/v1.0/<start>`
+
+6. **Temperature Stats from Start to End Date**: Returns the minimum, average, and maximum temperatures for the specified date range.
+
+    GET `/api/v1.0/<start>/<end>`
 
