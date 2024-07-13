@@ -27,7 +27,7 @@ This project involves climate analysis using SQLite database of weather data for
 
     GET `/api/v1.0/precipitation`
 
-3. **Stations** : `Returns a list of all stations.` 
+3. **Stations** : Returns a list of all stations.
 
     GET `/api/v1.0/stations`
 
